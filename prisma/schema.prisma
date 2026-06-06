@@ -21,11 +21,11 @@ model Customer {
   name           String
   phone          String
   wechat         String?
-  source         String      // 抖音|视频号|到店|转介绍|老客户|其他
+  source         String
   productNeeds   String?
   notes          String?
   images         String      @default("[]")
-  status         String      @default("新咨询") // 新咨询|已联系|已报价|高意向|已成交|无效客户
+  status         String      @default("新咨询")
   createdAt      DateTime    @default(now())
   lastFollowUpAt DateTime    @default(now())
   salespersonId  Int
@@ -39,7 +39,7 @@ model FollowUp {
   customerId Int
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   content    String
-  type       String   // 跟进|报价|成交|备注
+  type       String
   amount     Float?
   createdAt  DateTime @default(now())
 }
@@ -55,7 +55,7 @@ model Order {
   salesperson   Salesperson @relation(fields: [salespersonId], references: [id])
   orderDate     DateTime    @default(now())
   deliveryDate  DateTime?
-  status        String      @default("待确认") // 待确认|生产中|待交付|已完成
+  status        String      @default("待确认")
   notes         String?
   createdAt     DateTime    @default(now())
 }
